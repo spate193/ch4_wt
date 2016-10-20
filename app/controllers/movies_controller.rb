@@ -3,9 +3,12 @@ class MoviesController < ApplicationController
  def index
     @sort = params[:sort]
     @movies = Movie.order(@sort)
+    @all_ratings = params[:sort].collect {|key,value| key }
+    #['G', 'PG', 'PG-13', 'R']
+    
  end
   
- def create
+  def create
     #@movie = Movie.create!(params[:movie]) #old way
     @movie = Movie.create!(movie_params)  # new way
     flash[:notice] = "#{@movie.title} was successfully created."
